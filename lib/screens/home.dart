@@ -4,11 +4,28 @@ import '../components/game_battle.dart';
 import '../components/game_options.dart';
 import '../components/restart_button.dart';
 import '../components/scoreboard.dart';
+import '../models/jokenpo.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
   });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _playerScore = 0;
+  int _computerScore = 0;
+  GameOption _playerOption = GameOption.rock;
+  GameOption _computerOption = GameOption.rock;
+
+  void _setPlayerOption() {
+    setState(() {
+      _playerOption = GameOption.scissor;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +41,18 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Column(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Scoreboard(playerScore: 0, computerScore: 0),
-          GameBattle(),
-          GameOptions(),
-          RestartButton()
+          Scoreboard(
+            playerScore: _playerScore, computerScore: _computerScore
+          ),
+          GameBattle(
+            playerOption: _playerOption, computerOption: _computerOption
+          ),
+          GameOptions(onTap: _setPlayerOption),
+          const RestartButton(),
+          const SizedBox(height: 20)
         ],
       )
     );

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/jokenpo.dart';
+
 class GameBattle extends StatelessWidget {
+  final GameOption playerOption, computerOption;
   const GameBattle({
-    super.key,
+    super.key, required this.playerOption, required this.computerOption
   });
 
   @override
@@ -15,7 +18,7 @@ class GameBattle extends StatelessWidget {
           child: Transform.rotate(
             angle: 1.57,
             child: Image.asset(
-              'assets/images/scissor.png',
+              playerOption.imageName,
               height: 175, width: 175
             ),
           ),
@@ -23,7 +26,7 @@ class GameBattle extends StatelessWidget {
         Transform.rotate(
           angle: -1.57,
           child: Image.asset(
-            'assets/images/rock.png',
+            computerOption.imageName,
             height: 175, width: 175
           ),
         ),
