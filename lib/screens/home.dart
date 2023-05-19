@@ -20,8 +20,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _playerScore = 0;
   int _computerScore = 0;
-  GameOption _playerOption = GameOption.rock;
-  GameOption _computerOption = GameOption.rock;
+  GameOption? _playerOption;
+  GameOption? _computerOption;
 
   void _setPlayerOption(GameOption option) {
     if (option == _playerOption) return;
@@ -45,8 +45,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _playerScore = 0;
       _computerScore = 0;
-      _playerOption = GameOption.rock;
-      _computerOption = GameOption.rock;
+      _playerOption = null;
+      _computerOption = null;
     });
   }
 
@@ -69,9 +69,10 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Scoreboard(playerScore: _playerScore, computerScore: _computerScore),
-            GameBattle(playerOption: _playerOption, computerOption: _computerOption),
+            if (_playerOption == null) const GameBattle()
+            else GameBattle(playerOption: _playerOption!, computerOption: _computerOption!),
             GameOptions(onTap: _setPlayerOption),
-            RestartButton(onPressed: _restartGame),
+            _playerOption == null ? const SizedBox(height: 48,) : RestartButton(onPressed: _restartGame),
             const SizedBox(height: 20),
           ],
         ));

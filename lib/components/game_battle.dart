@@ -5,7 +5,7 @@ import '../models/jokenpo.dart';
 class GameBattle extends StatelessWidget {
   final GameOption playerOption, computerOption;
   const GameBattle({
-    super.key, required this.playerOption, required this.computerOption
+    super.key, this.playerOption=GameOption.rock, this.computerOption=GameOption.rock
   });
 
   @override
