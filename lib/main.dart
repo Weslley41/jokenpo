@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-
-import 'components/scoreboard.dart';
+import 'screens/home.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const JokenpoApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class JokenpoApp extends StatelessWidget {
+  const JokenpoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Jokenpô',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Column(
-          children: [
-            Scoreboard(playerScore: 0, computerScore: 0),
-          ],
-        ),
-      ),
+      home: HomePage()
     );
   }
 }

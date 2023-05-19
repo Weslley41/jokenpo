@@ -8,27 +8,12 @@ class Scoreboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        border: Border.all(
-          color: Theme.of(context).secondaryHeaderColor,
-          width: 1,
-        ),
-      ),
+    return SizedBox(
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 24.0),
         child: Column(
           children: [
-            const SizedBox(height: 32),
-            Text(
-              'Jokenpô',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
-            ),
-            const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
