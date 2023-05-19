@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../components/game_battle.dart';
@@ -23,9 +24,21 @@ class _HomePageState extends State<HomePage> {
   GameOption _computerOption = GameOption.rock;
 
   void _setPlayerOption(GameOption option) {
+    if (option == _playerOption) return;
+
     setState(() {
       _playerOption = option;
+      _computerOption = _getComputerOption();
     });
+  }
+
+  GameOption _getComputerOption() {
+    final List<GameOption> options = GameOption.values.where(
+      (option) => option != _computerOption
+    ).toList();
+    final int randomValue = Random().nextInt(options.length);
+
+    return options[randomValue];
   }
 
   void _restartGame() {
