@@ -28,6 +28,15 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _restartGame() {
+    setState(() {
+      _playerScore = 0;
+      _computerScore = 0;
+      _playerOption = GameOption.rock;
+      _computerOption = GameOption.rock;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +58,7 @@ class _HomePageState extends State<HomePage> {
             Scoreboard(playerScore: _playerScore, computerScore: _computerScore),
             GameBattle(playerOption: _playerOption, computerOption: _computerOption),
             GameOptions(onTap: _setPlayerOption),
-            const RestartButton(),
+            RestartButton(onPressed: _restartGame),
             const SizedBox(height: 20),
           ],
         ));

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class RestartButton extends StatelessWidget {
+  final void Function() onPressed;
   const RestartButton({
-    super.key,
+    super.key, required this.onPressed
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).secondaryHeaderColor,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
