@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   int _computerScore = 0;
   GameOption? _playerOption;
   GameOption? _computerOption;
+  String? _resultMessage;
 
   void _setPlayerOption(GameOption option) {
     if (option == _playerOption) return;
@@ -29,6 +30,18 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _playerOption = option;
       _computerOption = _getComputerOption();
+      final GameResult result = _playerOption! > _computerOption!;
+      _resultMessage = result.message;
+      switch (result) {
+        case GameResult.win:
+          _playerScore++;
+          break;
+        case GameResult.lose:
+          _computerScore++;
+          break;
+        case GameResult.draw:
+          break;
+      }
     });
   }
 
@@ -47,6 +60,7 @@ class _HomePageState extends State<HomePage> {
       _computerScore = 0;
       _playerOption = null;
       _computerOption = null;
+      _resultMessage = null;
     });
   }
 
@@ -72,7 +86,13 @@ class _HomePageState extends State<HomePage> {
             if (_playerOption == null) const GameBattle()
             else GameBattle(playerOption: _playerOption!, computerOption: _computerOption!),
             GameOptions(onTap: _setPlayerOption),
-            _playerOption == null ? const SizedBox(height: 48,) : RestartButton(onPressed: _restartGame),
+            Text(
+              _resultMessage ?? '',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Theme.of(context).secondaryHeaderColor,
+              ),
+            ),
+            _playerOption == null ? const SizedBox(height: 48) : RestartButton(onPressed: _restartGame),
             const SizedBox(height: 20),
           ],
         ));
