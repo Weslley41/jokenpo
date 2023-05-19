@@ -16,44 +16,7 @@ class RulesButton extends StatelessWidget {
           content: Stack(
             children: [
               Image.asset(
-                color: Colors.blue.shade800,
-                'assets/images/three_arrow_rotation.png',
-              ),
-              Positioned(
-                right: 25,
-                bottom: 155,
-                child: Transform.rotate(
-                  angle: -0.25,
-                  child: Image.asset(
-                    'assets/images/rock.png',
-                    height: 125,
-                    width: 125,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 170,
-                top: 85,
-                child: Transform.rotate(
-                  angle: -0.25,
-                  child: Image.asset(
-                    'assets/images/paper.png',
-                    height: 125,
-                    width: 125,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 23,
-                bottom: 0.1,
-                child: Transform.rotate(
-                  angle: -0.25,
-                  child: Image.asset(
-                    'assets/images/scissor.png',
-                    height: 125,
-                    width: 125,
-                  ),
-                ),
+                'assets/images/rules.png',
               ),
             ],
           ),
@@ -67,11 +30,9 @@ class RulesButton extends StatelessWidget {
           ],
         ),
       ),
-      child: Text(
-        'Regras',
-        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Theme.of(context).secondaryHeaderColor,
-            ),
+      child: Icon(
+        Icons.question_mark,
+        color: Theme.of(context).secondaryHeaderColor,
       ),
     );
   }
