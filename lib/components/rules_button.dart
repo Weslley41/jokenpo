@@ -13,10 +13,25 @@ class RulesButton extends StatelessWidget {
             'Regras do Jogo',
             textAlign: TextAlign.center,
           ),
-          content: Stack(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
                 'assets/images/rules.png',
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                '(A direção da seta indica quem vence)',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                'A tesoura(✌️) corta o papel(🖐️), mas quebra com a pedra(👊).\nO papel(🖐️) embrulha a pedra(👊), mas é cortado pela tesoura(✌️).\nA pedra(👊) quebra a tesoura(✌️), mas é embrulhada pelo papel(🖐️).',
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ],
           ),
