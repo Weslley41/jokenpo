@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/jokenpo.dart';
 
 class GameOptions extends StatelessWidget {
-  final Function() onTap;
+  final void Function(GameOption option) onTap;
   const GameOptions({
     super.key, required this.onTap
   });
@@ -23,15 +23,15 @@ class GameOptions extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             GestureDetector(
-              onTap: onTap,
+              onTap: () => onTap(GameOption.rock),
               child: Image.asset(GameOption.rock.imageName, height: 75, width: 75)
             ),
             GestureDetector(
-              onTap: onTap,
+              onTap: () => onTap(GameOption.paper),
               child: Image.asset(GameOption.paper.imageName, height: 75, width: 75)
             ),
             GestureDetector(
-              onTap: onTap,
+              onTap: () => onTap(GameOption.scissor),
               child: Image.asset(GameOption.scissor.imageName, height: 75, width: 75)
             ),
           ],

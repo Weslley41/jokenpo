@@ -22,9 +22,9 @@ class _HomePageState extends State<HomePage> {
   GameOption _playerOption = GameOption.rock;
   GameOption _computerOption = GameOption.rock;
 
-  void _setPlayerOption() {
+  void _setPlayerOption(GameOption option) {
     setState(() {
-      _playerOption = GameOption.scissor;
+      _playerOption = option;
     });
   }
 
@@ -43,12 +43,14 @@ class _HomePageState extends State<HomePage> {
                 ),
           ),
         ),
-        body: const Column(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Scoreboard(playerScore: 0, computerScore: 0),
-            GameBattle(),
-            GameOptions(),
-            RestartButton()
+            Scoreboard(playerScore: _playerScore, computerScore: _computerScore),
+            GameBattle(playerOption: _playerOption, computerOption: _computerOption),
+            GameOptions(onTap: _setPlayerOption),
+            const RestartButton(),
+            const SizedBox(height: 20),
           ],
         ));
   }
