@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:jokenpo/components/history_button.dart';
 
 import '../components/game_battle.dart';
 import '../components/game_options.dart';
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   GameOption? _playerOption;
   GameOption? _computerOption;
   String? _resultMessage;
+  List _gamedata = [];
 
   void _setPlayerOption(GameOption option) {
     if (option == _playerOption) return;
@@ -42,13 +44,15 @@ class _HomePageState extends State<HomePage> {
         case GameResult.draw:
           break;
       }
+      List temp = [_playerOption, _computerOption, result];
+      _gamedata.add(temp);
+      temp = [];
     });
   }
 
   GameOption _getComputerOption() {
-    final List<GameOption> options = GameOption.values.where(
-      (option) => option != _computerOption
-    ).toList();
+    final List<GameOption> options =
+        GameOption.values.where((option) => option != _computerOption).toList();
     final int randomValue = Random().nextInt(options.length);
 
     return options[randomValue];
@@ -61,6 +65,7 @@ class _HomePageState extends State<HomePage> {
       _playerOption = null;
       _computerOption = null;
       _resultMessage = null;
+      _gamedata = [];
     });
   }
 
@@ -69,7 +74,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          actions: const [RulesButton()],
+          actions: [
+            HistoryButton(
+                playerScore: _playerScore,
+                computerScore: _computerScore,
+                gameData: _gamedata),
+            const RulesButton(),
+          ],
           centerTitle: true,
           elevation: 0,
           title: Text(
@@ -82,17 +93,24 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Scoreboard(playerScore: _playerScore, computerScore: _computerScore),
-            if (_playerOption == null) const GameBattle()
-            else GameBattle(playerOption: _playerOption!, computerOption: _computerOption!),
+            Scoreboard(
+                playerScore: _playerScore, computerScore: _computerScore),
+            if (_playerOption == null)
+              const GameBattle()
+            else
+              GameBattle(
+                  playerOption: _playerOption!,
+                  computerOption: _computerOption!),
             GameOptions(onTap: _setPlayerOption),
             Text(
               _resultMessage ?? '',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
+                    color: Theme.of(context).secondaryHeaderColor,
+                  ),
             ),
-            _playerOption == null ? const SizedBox(height: 48) : RestartButton(onPressed: _restartGame),
+            _playerOption == null
+                ? const SizedBox(height: 48)
+                : RestartButton(onPressed: _restartGame),
             const SizedBox(height: 20),
           ],
         ));
