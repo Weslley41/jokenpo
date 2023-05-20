@@ -16,47 +16,42 @@ class Scoreboard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Jogador',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).secondaryHeaderColor,
-                        )
-                      ),
-                      Text(
-                        '$playerScore',
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Computador',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).secondaryHeaderColor,
-                        )
-                      ),
-                      Text(
-                        '$computerScore',
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                ScoreboardItem(name: 'Jogador', score: playerScore),
+                ScoreboardItem(name: 'Computador', score: computerScore),
               ],
             )
           ],
         ),
       )
+    );
+  }
+}
+
+class ScoreboardItem extends StatelessWidget {
+  const ScoreboardItem({
+    super.key,
+    required this.name,
+    required this.score,
+  });
+
+  final String name;
+  final int score;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: [
+          Text(
+            name,
+            style: Theme.of(context).textTheme.headlineSmall
+          ),
+          Text(
+            '$score',
+            style: Theme.of(context).textTheme.headlineLarge
+          ),
+        ],
+      ),
     );
   }
 }
