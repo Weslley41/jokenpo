@@ -19,19 +19,27 @@ class RulesButton extends StatelessWidget {
               Image.asset(
                 'assets/images/rules.png',
               ),
-              const SizedBox(
-                height: 30,
-              ),
               Text(
                 '(A direção da seta indica quem vence)',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(
-                height: 30,
+                height: 10,
               ),
               Text(
                 'A tesoura(✌️) corta o papel(🖐️), mas quebra com a pedra(👊).\nO papel(🖐️) embrulha a pedra(👊), mas é cortado pela tesoura(✌️).\nA pedra(👊) quebra a tesoura(✌️), mas é embrulhada pelo papel(🖐️).',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontWeight: FontWeight.w300, height: 1.5),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Não é permitido mostrar o mesmo gesto duas vezes seguidas.',
                 style: Theme.of(context).textTheme.titleMedium,
+                textAlign: TextAlign.center,
               ),
             ],
           ),
