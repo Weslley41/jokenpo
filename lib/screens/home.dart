@@ -22,16 +22,20 @@ class _HomePageState extends State<HomePage> {
   int _computerScore = 0;
   GameOption? _playerOption;
   GameOption? _computerOption;
-  String? _resultMessage;
+  String? _statusMessage;
 
   void _setPlayerOption(GameOption option) {
-    if (option == _playerOption) return;
+    if (option == _playerOption) {
+      return setState(() {
+        _statusMessage = 'Jogada inválida!';
+      });
+    }
 
     setState(() {
       _playerOption = option;
       _computerOption = _getComputerOption();
       final GameResult result = _playerOption! > _computerOption!;
-      _resultMessage = result.message;
+      _statusMessage = result.message;
       switch (result) {
         case GameResult.win:
           _playerScore++;
@@ -60,7 +64,7 @@ class _HomePageState extends State<HomePage> {
       _computerScore = 0;
       _playerOption = null;
       _computerOption = null;
-      _resultMessage = null;
+      _statusMessage = null;
     });
   }
 
@@ -85,13 +89,13 @@ class _HomePageState extends State<HomePage> {
             Scoreboard(playerScore: _playerScore, computerScore: _computerScore),
             if (_playerOption == null) const GameBattle()
             else GameBattle(playerOption: _playerOption!, computerOption: _computerOption!),
-            GameOptions(onTap: _setPlayerOption),
             Text(
-              _resultMessage ?? '',
+              _statusMessage ?? '',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 color: Theme.of(context).secondaryHeaderColor,
               ),
             ),
+            GameOptions(onTap: _setPlayerOption),
             _playerOption == null ? const SizedBox(height: 48) : RestartButton(onPressed: _restartGame),
             const SizedBox(height: 20),
           ],
