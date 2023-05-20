@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/jokenpo.dart';
+import 'option_image.dart';
 
 class GameBattle extends StatelessWidget {
   final GameOption playerOption, computerOption;
@@ -13,22 +14,12 @@ class GameBattle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Transform.flip(
-          flipY: true,
-          child: Transform.rotate(
-            angle: 1.57,
-            child: Image.asset(
-              playerOption.imageName,
-              height: 175, width: 175
-            ),
-          ),
+        OptionImage(
+          imageName: playerOption.imageName, size: 175,
+          angle: 1.57, flipY: true,
         ),
-        Transform.rotate(
-          angle: -1.57,
-          child: Image.asset(
-            computerOption.imageName,
-            height: 175, width: 175
-          ),
+        OptionImage(
+          imageName: playerOption.imageName, size: 175, angle: -1.57
         ),
       ],
     );

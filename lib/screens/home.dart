@@ -21,24 +21,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _playerScore = 0;
   int _computerScore = 0;
-  GameOption? _playerOption;
-  GameOption? _computerOption;
-  List _gameData = [];
+  JokenpoGame? _game;
+  final List<JokenpoGame> _gameHistory = [];
   String? _statusMessage;
 
-  void _setPlayerOption(GameOption option) {
-    if (option == _playerOption) {
+  void _runGame(GameOption playerOption) {
+    if (_game != null && playerOption == _game!.playerOption) {
       return setState(() {
         _statusMessage = 'Jogada inválida!';
       });
     }
 
     setState(() {
-      _playerOption = option;
-      _computerOption = _getComputerOption();
-      final GameResult result = _playerOption! > _computerOption!;
-      _statusMessage = result.message;
-      switch (result) {
+      _game = JokenpoGame(
+        playerOption: playerOption,
+        computerOption: _getComputerOption(),
+      );
+      _statusMessage = _game!.result.message;
+      switch (_game!.result) {
         case GameResult.win:
           _playerScore++;
           break;
@@ -48,15 +48,15 @@ class _HomePageState extends State<HomePage> {
         case GameResult.draw:
           break;
       }
-      List temp = [_playerOption, _computerOption, result];
-      _gameData.add(temp);
-      temp = [];
+      _gameHistory.add(_game!);
     });
   }
 
   GameOption _getComputerOption() {
-    final List<GameOption> options =
-        GameOption.values.where((option) => option != _computerOption).toList();
+    List<GameOption> options = GameOption.values;
+    if (_game != null) {
+      options = options.where((option) => option != _game!.computerOption).toList();
+    }
     final int randomValue = Random().nextInt(options.length);
 
     return options[randomValue];
@@ -66,10 +66,9 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _playerScore = 0;
       _computerScore = 0;
-      _playerOption = null;
-      _computerOption = null;
       _statusMessage = null;
-      _gameData = [];
+      _game = null;
+      _gameHistory.clear();
     });
   }
 
@@ -78,33 +77,33 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           actions: [
-            HistoryButton(
-                playerScore: _playerScore,
-                computerScore: _computerScore,
-                gameData: _gameData),
+            HistoryButton(gameHistory: _gameHistory),
             const RulesButton(),
           ],
           centerTitle: true,
           elevation: 0,
-          title: Text(
-            'Jokenpô',
-            style: Theme.of(context).textTheme.headlineMedium
-          ),
+          title: Text('Jokenpô',
+              style: Theme.of(context).textTheme.headlineMedium),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Scoreboard(playerScore: _playerScore, computerScore: _computerScore),
-            if (_playerOption == null) const GameBattle()
-            else GameBattle(playerOption: _playerOption!, computerOption: _computerOption!),
-            Text(
-              _statusMessage ?? '',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              )
-            ),
-            GameOptions(onTap: _setPlayerOption),
-            _playerOption == null ? const SizedBox(height: 48) : RestartButton(onPressed: _restartGame),
+            Scoreboard(
+                playerScore: _playerScore, computerScore: _computerScore),
+            if (_game == null)
+              const GameBattle()
+            else
+              GameBattle(
+                  playerOption: _game!.playerOption,
+                  computerOption: _game!.computerOption),
+            Text(_statusMessage ?? '',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    )),
+            GameOptions(onTap: _runGame),
+            _game == null
+                ? const SizedBox(height: 48)
+                : RestartButton(onPressed: _restartGame),
             const SizedBox(height: 20),
           ],
         ));

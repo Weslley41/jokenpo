@@ -38,3 +38,15 @@ enum GameResult {
     return messages[index];
   }
 }
+
+class JokenpoGame {
+  final GameOption playerOption;
+  final GameOption computerOption;
+
+  JokenpoGame({
+    required this.playerOption,
+    required this.computerOption,
+  });
+
+  GameResult get result => playerOption > computerOption;
+}

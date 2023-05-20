@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../models/jokenpo.dart';
+import '../screens/history.dart';
+import 'option_image.dart';
+
 class HistoryButton extends StatelessWidget {
-  final List gameData;
-  final int playerScore;
-  final int computerScore;
+  final List<JokenpoGame> gameHistory;
 
   const HistoryButton({
-    required this.gameData,
-    required this.playerScore,
-    required this.computerScore,
+    required this.gameHistory,
     super.key,
   });
 
@@ -16,26 +16,8 @@ class HistoryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        debugPrint(gameData.toString() +
-            playerScore.toString() +
-            computerScore.toString());
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => Scaffold(
-            appBar: AppBar(
-              actions: const [],
-              centerTitle: true,
-              elevation: 0,
-              title: Text('Histórico das Partidas',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall),
-            ),
-            body: GridView.count(
-              crossAxisCount: 1,
-              crossAxisSpacing: 0.0,
-              mainAxisSpacing: 0.0,
-              children: gameData.map((e) => RowGrid(data: e)).toList(),
-            ),
-          ),
+          builder: (BuildContext context) => HistoryPage(gameHistory: gameHistory),
         ));
       },
       child: const Icon(Icons.leaderboard),
@@ -43,12 +25,10 @@ class HistoryButton extends StatelessWidget {
   }
 }
 
-//gameData.map((e) => RowGrid(rowList: e)
-
-class RowGrid extends StatelessWidget {
-  final List data;
-  const RowGrid({
-    required this.data,
+class HistoryGame extends StatelessWidget {
+  final JokenpoGame game;
+  const HistoryGame({
+    required this.game,
     super.key,
   });
 
@@ -56,48 +36,47 @@ class RowGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              'Sua Jogada',
-              style: Theme.of(context).textTheme.bodyLarge,
+            HistoryGameItem(
+              name: 'Jogador',
+              optionImage: OptionImage(
+                imageName: game.playerOption.imageName, size: 50,
+                angle: 1.57, flipY: true,
+              )
             ),
-            Text(
-              'Jogada do Computador',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            Text(
-              'Resultado',
-              style: Theme.of(context).textTheme.bodyLarge,
+            HistoryGameItem(
+              name: 'Computador',
+              optionImage: OptionImage(
+                imageName: game.playerOption.imageName, size: 50, angle: -1.57,
+              )
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Transform.rotate(
-              angle: 1.57,
-              child: Image.asset(
-                data[0].imageName,
-                width: 50,
-                height: 50,
-              ),
-            ),
-            Transform.rotate(
-              angle: -1.57,
-              child: Image.asset(
-                data[1].imageName,
-                width: 50,
-                height: 50,
-              ),
-            ),
-            Text(
-              data[2].message,
-              style: Theme.of(context).textTheme.headlineSmall,
-            )
-          ],
+      ],
+    );
+  }
+}
+
+class HistoryGameItem extends StatelessWidget {
+  const HistoryGameItem({
+    super.key, required this.name, required this.optionImage,
+  });
+
+  final String name;
+  final OptionImage optionImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          name,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
+        optionImage
       ],
     );
   }
