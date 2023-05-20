@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const JokenpoApp());
@@ -10,10 +11,11 @@ class JokenpoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Jokenpô',
       debugShowCheckedModeBanner: false,
-      home: HomePage()
+      home: const HomePage(),
+      theme: jokenpoTheme
     );
   }
 }

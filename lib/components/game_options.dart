@@ -14,9 +14,7 @@ class GameOptions extends StatelessWidget {
       children: [
         Text(
           'Escolha uma opção para jogar:',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: Theme.of(context).secondaryHeaderColor,
-          ),
+          style: Theme.of(context).textTheme.titleLarge
         ),
         const SizedBox(height: 24),
         Row(

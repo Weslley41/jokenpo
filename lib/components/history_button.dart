@@ -22,7 +22,6 @@ class HistoryButton extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) => Scaffold(
-              backgroundColor: Theme.of(context).primaryColor,
               appBar: AppBar(
                 actions: const [],
                 centerTitle: true,
@@ -30,9 +29,7 @@ class HistoryButton extends StatelessWidget {
                 title: Text(
                   'Histórico das Partidas',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Theme.of(context).secondaryHeaderColor,
-                      ),
+                  style: Theme.of(context).textTheme.headlineSmall
                 ),
               ),
               body: Table(
@@ -42,10 +39,7 @@ class HistoryButton extends StatelessWidget {
           ),
         );
       },
-      child: Icon(
-        Icons.leaderboard,
-        color: Theme.of(context).secondaryHeaderColor,
-      ),
+      child: const Icon(Icons.leaderboard),
     );
   }
 }

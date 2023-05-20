@@ -76,7 +76,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           actions: [
             HistoryButton(
@@ -89,9 +88,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           title: Text(
             'Jokenpô',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Theme.of(context).secondaryHeaderColor,
-                ),
+            style: Theme.of(context).textTheme.headlineMedium
           ),
         ),
         body: Column(
@@ -102,9 +99,9 @@ class _HomePageState extends State<HomePage> {
             else GameBattle(playerOption: _playerOption!, computerOption: _computerOption!),
             Text(
               _statusMessage ?? '',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).secondaryHeaderColor,
-                  ),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              )
             ),
             GameOptions(onTap: _setPlayerOption),
             _playerOption == null ? const SizedBox(height: 48) : RestartButton(onPressed: _restartGame),

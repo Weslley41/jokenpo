@@ -47,16 +47,15 @@ class RulesButton extends StatelessWidget {
             Center(
               child: TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Voltar'),
+                child: Text(
+                  'Voltar', style: Theme.of(context).textTheme.titleLarge,
+                ),
               ),
             ),
           ],
         ),
       ),
-      child: Icon(
-        Icons.question_mark,
-        color: Theme.of(context).secondaryHeaderColor,
-      ),
+      child: const Icon(Icons.question_mark),
     );
   }
 }
