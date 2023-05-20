@@ -23,17 +23,25 @@ class _HomePageState extends State<HomePage> {
   int _computerScore = 0;
   GameOption? _playerOption;
   GameOption? _computerOption;
+<<<<<<< HEAD
   String? _resultMessage;
   List _gamedata = [];
+=======
+  String? _statusMessage;
+>>>>>>> 3562f3c110845fd3d3de9ffd45699f5460c593a6
 
   void _setPlayerOption(GameOption option) {
-    if (option == _playerOption) return;
+    if (option == _playerOption) {
+      return setState(() {
+        _statusMessage = 'Jogada inválida!';
+      });
+    }
 
     setState(() {
       _playerOption = option;
       _computerOption = _getComputerOption();
       final GameResult result = _playerOption! > _computerOption!;
-      _resultMessage = result.message;
+      _statusMessage = result.message;
       switch (result) {
         case GameResult.win:
           _playerScore++;
@@ -64,8 +72,12 @@ class _HomePageState extends State<HomePage> {
       _computerScore = 0;
       _playerOption = null;
       _computerOption = null;
+<<<<<<< HEAD
       _resultMessage = null;
       _gamedata = [];
+=======
+      _statusMessage = null;
+>>>>>>> 3562f3c110845fd3d3de9ffd45699f5460c593a6
     });
   }
 
@@ -93,6 +105,7 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+<<<<<<< HEAD
             Scoreboard(
                 playerScore: _playerScore, computerScore: _computerScore),
             if (_playerOption == null)
@@ -102,15 +115,25 @@ class _HomePageState extends State<HomePage> {
                   playerOption: _playerOption!,
                   computerOption: _computerOption!),
             GameOptions(onTap: _setPlayerOption),
+=======
+            Scoreboard(playerScore: _playerScore, computerScore: _computerScore),
+            if (_playerOption == null) const GameBattle()
+            else GameBattle(playerOption: _playerOption!, computerOption: _computerOption!),
+>>>>>>> 3562f3c110845fd3d3de9ffd45699f5460c593a6
             Text(
-              _resultMessage ?? '',
+              _statusMessage ?? '',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Theme.of(context).secondaryHeaderColor,
                   ),
             ),
+<<<<<<< HEAD
             _playerOption == null
                 ? const SizedBox(height: 48)
                 : RestartButton(onPressed: _restartGame),
+=======
+            GameOptions(onTap: _setPlayerOption),
+            _playerOption == null ? const SizedBox(height: 48) : RestartButton(onPressed: _restartGame),
+>>>>>>> 3562f3c110845fd3d3de9ffd45699f5460c593a6
             const SizedBox(height: 20),
           ],
         ));
