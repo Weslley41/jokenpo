@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-final jokenpoTheme = ThemeData.from(
+final jokenpoTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: Colors.white,
-    secondary: Colors.blue.shade600,
-    tertiary: Colors.blue.shade400,
-    background: Colors.blue.shade400,
-    surface: Colors.blue.shade600,
+    secondary: const Color.fromARGB(255, 48, 53, 53),
+    tertiary: const Color.fromARGB(255, 148, 161, 135),
+    background: const Color.fromARGB(255, 148, 161, 135),
+    surface: const Color.fromARGB(255, 48, 53, 53),
     onSurface: Colors.white,
   ),
 );
