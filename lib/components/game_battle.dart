@@ -6,7 +6,7 @@ import 'option_image.dart';
 class GameBattle extends StatelessWidget {
   static final String defaultOption = GameOption.rock.imageName;
   final JokenpoGame? game;
-  const GameBattle({super.key, required this.game});
+  const GameBattle({super.key, this.game});
 
   String get playerOption => game?.playerOption.imageName ?? defaultOption;
   String get computerOption => game?.computerOption.imageName ?? defaultOption;

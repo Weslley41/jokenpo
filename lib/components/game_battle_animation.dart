@@ -1,48 +1,47 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import '../models/jokenpo.dart';
 import 'option_image.dart';
 
-class GameBattleAnimated extends StatefulWidget {
-  static final String defaultOption = GameOption.rock.imageName;
-  final JokenpoGame? game;
-  const GameBattleAnimated({super.key, required this.game});
+class GameBattleAnimation extends StatefulWidget {
+  const GameBattleAnimation({super.key});
 
   @override
-  State<GameBattleAnimated> createState() => _GameBattleAnimatedState();
+  State<GameBattleAnimation> createState() => _GameBattleAnimationState();
 }
 
-class _GameBattleAnimatedState extends State<GameBattleAnimated>
-    with TickerProviderStateMixin {
-  String get playerOption =>
-      widget.game?.playerOption.imageName ?? GameBattleAnimated.defaultOption;
-
-  String get computerOption =>
-      widget.game?.computerOption.imageName ?? GameBattleAnimated.defaultOption;
-
+class _GameBattleAnimationState extends State<GameBattleAnimation> with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animationHandLeft;
   late Animation<double> animationHandRight;
+  final String defaultOption = GameOption.rock.imageName;
 
   @override
   void initState() {
     super.initState();
     controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 450));
+      vsync: this, duration: const Duration(milliseconds: 250)
+    );
 
     animationHandLeft = Tween<double>(
-      begin: pi / 18,
+      begin: 0,
       end: -pi / 18,
     ).animate(controller);
-    controller.repeat(reverse: true);
 
     animationHandRight = Tween<double>(
-      begin: -pi / 18,
+      begin: 0,
       end: pi / 18,
     ).animate(controller);
+
+    _runAnimation();
+  }
+
+  void _runAnimation() {
     controller.repeat(reverse: true);
+    Future.delayed(const Duration(milliseconds: 1200), () {
+      controller.stop();
+    });
   }
 
   @override
@@ -63,7 +62,7 @@ class _GameBattleAnimatedState extends State<GameBattleAnimated>
               alignment: Alignment.centerLeft,
               transform: Matrix4.identity()..rotateZ(animationHandLeft.value),
               child: OptionImage(
-                imageName: playerOption,
+                imageName: defaultOption,
                 size: 175,
                 angle: 1.57,
                 flipY: true,
@@ -78,7 +77,7 @@ class _GameBattleAnimatedState extends State<GameBattleAnimated>
               alignment: Alignment.centerRight,
               transform: Matrix4.identity()..rotateZ(animationHandRight.value),
               child: OptionImage(
-                imageName: computerOption,
+                imageName: defaultOption,
                 size: 175,
                 angle: -1.57,
               ),
