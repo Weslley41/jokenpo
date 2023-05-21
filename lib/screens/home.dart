@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   int _computerScore = 0;
   JokenpoGame? _game;
   final List<JokenpoGame> _gameHistory = [];
-  String? _statusMessage;
+  String _statusMessage = '';
 
   void _runGame(GameOption playerOption) {
     if (_game != null && playerOption == _game!.playerOption) {
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _playerScore = 0;
       _computerScore = 0;
-      _statusMessage = null;
+      _statusMessage = '';
       _game = null;
       _gameHistory.clear();
     });
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               GameBattle(
                   playerOption: _game!.playerOption,
                   computerOption: _game!.computerOption),
-            Text(_statusMessage ?? '',
+            Text(_statusMessage,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     )),
