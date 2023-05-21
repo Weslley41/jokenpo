@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         case GameResult.draw:
           break;
       }
-      _gameHistory.add(_game!);
+      _gameHistory.insert(0, _game!);
     });
   }
 
