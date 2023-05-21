@@ -19,7 +19,7 @@ class GameBattle extends StatelessWidget {
           angle: 1.57, flipY: true,
         ),
         OptionImage(
-          imageName: playerOption.imageName, size: 175, angle: -1.57
+          imageName: computerOption.imageName, size: 175, angle: -1.57
         ),
       ],
     );
