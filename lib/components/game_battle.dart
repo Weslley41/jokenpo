@@ -4,10 +4,12 @@ import '../models/jokenpo.dart';
 import 'option_image.dart';
 
 class GameBattle extends StatelessWidget {
-  final GameOption playerOption, computerOption;
-  const GameBattle({
-    super.key, this.playerOption=GameOption.rock, this.computerOption=GameOption.rock
-  });
+  static final String defaultOption = GameOption.rock.imageName;
+  final JokenpoGame? game;
+  const GameBattle({super.key, required this.game});
+
+  String get playerOption => game?.playerOption.imageName ?? defaultOption;
+  String get computerOption => game?.computerOption.imageName ?? defaultOption;
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,10 @@ class GameBattle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         OptionImage(
-          imageName: playerOption.imageName, size: 175,
-          angle: 1.57, flipY: true,
+          imageName: playerOption, size: 175, angle: 1.57, flipY: true,
         ),
         OptionImage(
-          imageName: computerOption.imageName, size: 175, angle: -1.57
+          imageName: computerOption, size: 175, angle: -1.57
         ),
       ],
     );
