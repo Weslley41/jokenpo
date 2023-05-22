@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+
+import '../theme.dart';
+
 enum GameOption {
   rock,
   paper,
@@ -49,4 +53,14 @@ class JokenpoGame {
   });
 
   GameResult get result => playerOption > computerOption;
+  Map<String, TextStyle> get textStyles {
+    switch (result) {
+      case GameResult.win:
+        return {'player': kTextWinner, 'computer': kTextLoser};
+      case GameResult.lose:
+        return {'player': kTextLoser, 'computer': kTextWinner};
+      case GameResult.draw:
+        return {'player': kTextDraw, 'computer': kTextDraw};
+    }
+  }
 }

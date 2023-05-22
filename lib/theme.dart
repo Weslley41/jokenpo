@@ -11,3 +11,15 @@ final jokenpoTheme = ThemeData(
     onSurface: Colors.white,
   ),
 );
+
+final TextStyle kTextWinner = TextStyle(
+  color: jokenpoTheme.colorScheme.secondary,
+  fontSize: 20,
+  fontWeight: FontWeight.bold
+);
+final TextStyle kTextLoser = TextStyle(
+  color: jokenpoTheme.colorScheme.tertiary,
+  fontSize: 20,
+  fontWeight: FontWeight.bold
+);
+final TextStyle kTextDraw = kTextLoser;
