@@ -63,9 +63,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   GameOption _getComputerOption() {
-    const List<GameOption> options = GameOption.values;
+    List<GameOption> options = GameOption.values;
     if (_game != null) {
-      options.remove(_game!.computerOption);
+      options = options.where(
+        (option) => option != _game!.computerOption
+      ).toList();
     }
     final int randomValue = Random().nextInt(options.length);
 
