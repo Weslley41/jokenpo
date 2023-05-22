@@ -11,7 +11,8 @@ class GameBattleAnimation extends StatefulWidget {
   State<GameBattleAnimation> createState() => _GameBattleAnimationState();
 }
 
-class _GameBattleAnimationState extends State<GameBattleAnimation> with TickerProviderStateMixin {
+class _GameBattleAnimationState extends State<GameBattleAnimation>
+    with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animationHandLeft;
   late Animation<double> animationHandRight;
@@ -21,8 +22,7 @@ class _GameBattleAnimationState extends State<GameBattleAnimation> with TickerPr
   void initState() {
     super.initState();
     controller = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 250)
-    );
+        vsync: this, duration: const Duration(milliseconds: 250));
 
     animationHandLeft = Tween<double>(
       begin: 0,
@@ -39,13 +39,11 @@ class _GameBattleAnimationState extends State<GameBattleAnimation> with TickerPr
 
   void _runAnimation() {
     controller.repeat(reverse: true);
-    Future.delayed(const Duration(milliseconds: 1200), () {
-      controller.stop();
-    });
   }
 
   @override
   void dispose() {
+    controller.stop();
     controller.dispose();
     super.dispose();
   }

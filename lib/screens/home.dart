@@ -26,7 +26,8 @@ class _HomePageState extends State<HomePage> {
   final List<JokenpoGame> _gameHistory = [];
   String _statusMessage = '';
   Widget _gameBattleWidget = const GameBattle();
-  final GameBattleAnimation _gameBattleAnimatedWidget = const GameBattleAnimation();
+  final GameBattleAnimation _gameBattleAnimatedWidget =
+      const GameBattleAnimation();
 
   void _runGame(GameOption playerOption) {
     if (_game != null && playerOption == _game!.playerOption) {
@@ -65,9 +66,8 @@ class _HomePageState extends State<HomePage> {
   GameOption _getComputerOption() {
     List<GameOption> options = GameOption.values;
     if (_game != null) {
-      options = options.where(
-        (option) => option != _game!.computerOption
-      ).toList();
+      options =
+          options.where((option) => option != _game!.computerOption).toList();
     }
     final int randomValue = Random().nextInt(options.length);
 
@@ -88,34 +88,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          if (_game != null) HistoryButton(gameHistory: _gameHistory),
-          const RulesButton(),
-        ],
-        centerTitle: true,
-        elevation: 0,
-        title: Text(
-          'Jokenpô',
-          style: Theme.of(context).textTheme.headlineMedium
+        appBar: AppBar(
+          actions: [
+            if (_game != null) HistoryButton(gameHistory: _gameHistory),
+            const RulesButton(),
+          ],
+          centerTitle: true,
+          elevation: 0,
+          title: Text('Jokenpô',
+              style: Theme.of(context).textTheme.headlineMedium),
         ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Scoreboard(playerScore: _playerScore, computerScore: _computerScore),
-          _gameBattleWidget,
-          Text(
-            _statusMessage,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-            )
-          ),
-          GameOptions(onTap: _runGame),
-          _game == null ? const SizedBox(height: 48) : RestartButton(onPressed: _restartGame),
-          const SizedBox(height: 20),
-        ],
-      )
-    );
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Scoreboard(
+                playerScore: _playerScore, computerScore: _computerScore),
+            _gameBattleWidget,
+            Text(_statusMessage,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    )),
+            GameOptions(onTap: _runGame),
+            _game == null
+                ? const SizedBox(height: 48)
+                : RestartButton(onPressed: _restartGame),
+            const SizedBox(height: 20),
+          ],
+        ));
   }
 }

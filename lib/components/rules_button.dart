@@ -14,10 +14,11 @@ class RulesButton extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           content: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Image.asset(
                 'assets/images/rules.png',
+                height: 200,
               ),
               Text(
                 '(A direção da seta indica quem vence)',
@@ -33,9 +34,6 @@ class RulesButton extends StatelessWidget {
                     .titleMedium!
                     .copyWith(fontWeight: FontWeight.w300, height: 1.5),
               ),
-              const SizedBox(
-                height: 10,
-              ),
               Text(
                 'Não é permitido mostrar o mesmo gesto duas vezes seguidas.',
                 style: Theme.of(context).textTheme.titleMedium,
@@ -46,9 +44,10 @@ class RulesButton extends StatelessWidget {
           actions: <Widget>[
             Center(
               child: TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
+                onPressed: () => Navigator.pop(context, 'Voltar'),
                 child: Text(
-                  'Voltar', style: Theme.of(context).textTheme.titleLarge,
+                  'Voltar',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
             ),
