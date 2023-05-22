@@ -50,7 +50,7 @@ class HistoryGame extends StatelessWidget {
             HistoryGameItem(
               name: 'Computador',
               optionImage: OptionImage(
-                imageName: game.playerOption.imageName, size: 50, angle: -1.57,
+                imageName: game.computerOption.imageName, size: 50, angle: -1.57,
               )
             ),
           ],
