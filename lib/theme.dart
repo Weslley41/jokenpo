@@ -12,14 +12,25 @@ final jokenpoTheme = ThemeData(
   ),
 );
 
+final Color kWinnerColor = Colors.green.shade900;
+final Color kLoserColor = jokenpoTheme.colorScheme.tertiary;
+final Color kDrawColor = Colors.grey.shade600;
+
 final TextStyle kTextWinner = TextStyle(
-  color: jokenpoTheme.colorScheme.secondary,
+  color: kWinnerColor,
   fontSize: 20,
   fontWeight: FontWeight.bold
 );
 final TextStyle kTextLoser = TextStyle(
-  color: jokenpoTheme.colorScheme.tertiary,
+  color: kLoserColor,
   fontSize: 20,
   fontWeight: FontWeight.bold
 );
-final TextStyle kTextDraw = kTextLoser;
+final TextStyle kTextDraw = TextStyle(
+  color: kDrawColor,
+  fontSize: 20,
+  fontWeight: FontWeight.bold
+);
+final TextStyle kTextColorsLabel = TextStyle(
+  color: jokenpoTheme.colorScheme.secondary,
+);
