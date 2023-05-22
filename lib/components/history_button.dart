@@ -20,7 +20,7 @@ class HistoryButton extends StatelessWidget {
           builder: (BuildContext context) => HistoryPage(gameHistory: gameHistory),
         ));
       },
-      child: const Icon(Icons.leaderboard),
+      child: const Icon(Icons.history),
     );
   }
 }
