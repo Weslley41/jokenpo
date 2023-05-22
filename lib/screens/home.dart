@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   final List<JokenpoGame> _gameHistory = [];
   String _statusMessage = '';
   Widget _gameBattleWidget = const GameBattle();
+  late void Function() _restartGameFunc;
   final GameBattleAnimation _gameBattleAnimatedWidget =
       const GameBattleAnimation();
 
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     setState(() {
+      _restartGameFunc = () {};
       _gameBattleWidget = _gameBattleAnimatedWidget;
     });
 
@@ -47,6 +49,7 @@ class _HomePageState extends State<HomePage> {
           computerOption: _getComputerOption(),
         );
         _gameBattleWidget = GameBattle(game: _game);
+        _restartGameFunc = _restartGame;
         _statusMessage = _game!.result.message;
         switch (_game!.result) {
           case GameResult.win:
@@ -111,7 +114,7 @@ class _HomePageState extends State<HomePage> {
             GameOptions(onTap: _runGame),
             _game == null
                 ? const SizedBox(height: 48)
-                : RestartButton(onPressed: _restartGame),
+                : RestartButton(onPressed: _restartGameFunc),
             const SizedBox(height: 20),
           ],
         ));
