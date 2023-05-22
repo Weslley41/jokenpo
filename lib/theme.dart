@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 final jokenpoTheme = ThemeData(
   useMaterial3: true,
+  fontFamily: 'Exo',
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: Colors.white,
     secondary: const Color.fromARGB(255, 48, 53, 53),
