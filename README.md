@@ -1,4 +1,5 @@
 # Jokenpô - 1nd test of the discipline "Programação 4" at UESPI
+[Download APK here](https://github.com/Weslley41/jokenpo/releases/download/v1/jokenpo.apk)
 
 ## Task
 Develop a mobile application in Flutter that implements the Jokenpô game.
